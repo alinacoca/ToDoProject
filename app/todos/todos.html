@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="todos/todos.css">
+
+<div ng-controller="TodosCtrl as ctrl">
+    <p class="title">Todos</p>
+
+    <div ng-if="ctrl.todos.length==0">
+        <p class="add-todo-text-big" ng-click="ctrl.openAddModal()">+ Add a todo</p>
+    </div>
+        
+    <div class="card-container" ng-click="ctrl.openAddModal()" ng-if="ctrl.todos.length>0">
+        <div class="todo-card">
+            <p class="add-todo-text-small">+ Add a todo</p>
+        </div>
+    </div>
+    <div ng-if="ctrl.todos.length>0">
+        <div ng-repeat="todo in ctrl.todos" class="card-container">
+            <div class="todo-card">
+                <div class="menu-icons">
+                    <img src="../edit.svg" class="icons" ng-click="ctrl.openEditModal(todo)">
+                    <img src="../delete.svg" class="icons" ng-click="ctrl.openDeleteModal(todo)">
+                </div>
+                <h4 class="todo-card-title" title="{{todo.title}}"><b>{{todo.title}}</b></h4>
+                <div class="todo-card-row">
+                    <div class="todo-card-label">Description: </div>
+                    <div class="info-date"  title="{{todo.description}}">{{todo.description}}</div>
+                </div>
+                <div class="todo-card-row">
+                    <div class="todo-card-label">Added date: </div>
+                    <div class="info-date" title="{{todo.addedDate}}">{{todo.addedDate}}</div>
+                </div>
+                <div class="todo-card-row">
+                    <div class="todo-card-label">Expiration date: </div>
+                    <div class="info-date" title="{{todo.expirationDate}}">{{todo.expirationDate}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form ng-submit="ctrl.addTodo()" class="form-container">
+                <p class="label-form">Title:</p><input type="text" class="input-form" ng-model="ctrl.newTodo.title">
+                <p class="label-form">Description:</p><input type="text" class="input-form" ng-model="ctrl.newTodo.description">
+                <p class="label-form">Expiration date:</p><input type="text" class="input-form" ng-model="ctrl.newTodo.expirationDate">
+                <button class="submit-button" type="submit">ADD TODO</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form ng-submit="ctrl.editTodo()" class="form-container">
+                <p class="label-form">Title:</p><input type="text" class="input-form" ng-model="ctrl.editableTodo.title">
+                <p class="label-form">Description:</p><input type="text" class="input-form" ng-model="ctrl.editableTodo.description">
+                <p class="label-form">Expiration date:</p><input type="text" class="input-form" ng-model="ctrl.editableTodo.expirationDate">
+                <button class="submit-button" type="submit">EDIT TODO</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Are you sure?</p>
+            <button ng-click="ctrl.deleteTodo(todo)">DELETE</button>
+            <button ng-click="ctrl.cancelDelete()">CANCEL</button>
+        </div>
+    </div>
+</div>
