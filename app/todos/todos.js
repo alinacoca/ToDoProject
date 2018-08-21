@@ -120,5 +120,27 @@ angular.module('todos', [])
         modal.style.display = "none";
       }
 
+      this.items = [
+        'The first choice!',
+        'And another choice for you.',
+        'but wait! A third!'
+      ];
+    
+      this.status = {
+        isopen: false
+      };
+    
+      this.toggled = function(open) {
+        $log.log('Dropdown is now: ', open);
+      };
+    
+      this.toggleDropdown = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+        this.status.isopen = !this.status.isopen;
+      };
+    
+      this.appendToEl = angular.element(document.querySelector('#dropdown-long-content'));
+
     }
   );
