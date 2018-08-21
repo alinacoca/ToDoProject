@@ -115,5 +115,10 @@ angular.module('todos', [])
         modal.style.display = "none";
       }
 
+      this.cancelDelete = function () {
+        var modal = document.getElementById('delete-modal');
+        modal.style.display = "none";
+      }
+
     }
   );
